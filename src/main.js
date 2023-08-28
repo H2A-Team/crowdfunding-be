@@ -55,6 +55,6 @@ httpServer.listen(PORT, () => {
 });
 
 // init redis connection
-RedisClient.initRedisConnectionAsync();
+// RedisClient.initRedisConnectionAsync();
 
 runOldProjectAutomationJobAsync();

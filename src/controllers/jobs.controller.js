@@ -2,8 +2,6 @@ import moment from "moment/moment.js";
 import { HTTP_CODE } from "../common/constants/response-code.const.js";
 import { RequestValidationException } from "../common/exceptions/common.exception.js";
 import { ResponseBuilder } from "../common/utils/builders/response.builder.js";
-import { RedisClient } from "../infrastruture/connections/redis.js";
-import schedule from "node-schedule";
 import { registerProjectAutomationJob } from "../events/product-scheduler.js";
 
 /**
@@ -25,17 +23,17 @@ export async function createProjectAutomationJob(req, res) {
         throw new RequestValidationException("Invalid funding end date");
     }
 
-    const redisKey = `projects_automation:${slug}`;
-    const client = RedisClient.getRedisClient();
+    // const redisKey = `projects_automation:${slug}`;
+    // const client = RedisClient.getRedisClient();
     // check key
-    const oldValue = await client.get(redisKey);
+    // const oldValue = await client.get(redisKey);
 
-    if (!oldValue) {
-        // save key
-        await client.set(redisKey, JSON.stringify({ endsAt }));
-        // create job
-        registerProjectAutomationJob(slug, new Date(endsAt));
-    }
+    // if (!oldValue) {
+    // save key
+    // await client.set(redisKey, JSON.stringify({ endsAt }));
+    // create job
+    // }
+    registerProjectAutomationJob(slug, new Date(endsAt));
 
     res.status(HTTP_CODE.created).json(new ResponseBuilder().withCode(HTTP_CODE.created).withData({}).build());
 }

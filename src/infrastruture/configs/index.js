@@ -11,11 +11,6 @@ export const APP_CONFIG = {
     origin: process.env.ORIGIN.split(" ") || "*",
     credential: Boolean(process.env.CREDENTIAL).valueOf(),
 
-    redis: {
-        host: process.env.REDIS_HOST,
-        port: process.env.REDIS_PORT ? +process.env.REDIS_PORT : 6379,
-    },
-
     contractAddress: process.env.CONTRACT_ADDRESS || "",
     thirdweb: {
         privateKey: process.env.THIRDWEB_KEY || "",
